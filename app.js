@@ -10,14 +10,17 @@ const user = require("./controllers/user");
 const event = require("./controllers/event");
 const comments = require("./controllers/comments")
 
-app.use(require("./middleware/headers"));
 
 sequelize.sync();
+
+app.use(require("./middleware/headers"));
 
 app.use(bodyParser.json())
 
 
 app.use("/user", user);
+
+app.use(require("./middleware/validate-session"))
 
 app.use("/event", event);
 
