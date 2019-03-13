@@ -3,12 +3,13 @@ require("dotenv").config();
 var express = require('express');
 var app = express();
 
-const bodyParser = require("body-parser");
-const sequelize = require("./db");
 
 const user = require("./controllers/user");
 const event = require("./controllers/event");
-const comments = require("./controllers/comments")
+const comments = require("./controllers/comments");
+
+const bodyParser = require("body-parser");
+const sequelize = require("./db");
 
 
 sequelize.sync();
