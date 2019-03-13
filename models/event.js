@@ -21,6 +21,14 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.TEXT,
             allowNull: false
         },
+        date: {
+            type: DataTypes.DATEONLY,
+            allowNull: false
+        },
+        time: {
+            type: DataTypes.TIME,
+            allowNull: false
+        },
         owner: {
             type: DataTypes.INTEGER
         }
