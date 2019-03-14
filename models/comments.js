@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
         owner: {
             type: DataTypes.INTEGER
         },
-        eventId: {
+        eventid: {
             type: DataTypes.INTEGER
         }
 
