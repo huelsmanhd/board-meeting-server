@@ -19,7 +19,7 @@ router.post("/create/:id", validateSession, (req, res) => {
     let param = req.params.id;
     if(!req.error) {
         const comment = {
-            username: req.user.username,
+            
             comment: req.body.comment,
             owner: req.user.id,
             eventId: param
