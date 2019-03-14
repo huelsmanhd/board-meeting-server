@@ -29,7 +29,7 @@ router.get("/user/:id", validateSession, (req, res) => {
 router.post("/create", validateSession, (req, res) => {
     if(!req.error) {
         const event = {
-            username: req.user.username,
+            
             type: req.body.type,
             title: req.body.title,
             date: req.body.date,

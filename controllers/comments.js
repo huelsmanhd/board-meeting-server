@@ -8,7 +8,7 @@ var Comments = sequelize.import("../models/comments");
 
 //FINDS ALL COMMENTS FROM EVENT ID
 router.get("/all/:id", validateSession, (req, res) => {
-    // let id = req.params.id;
+    
     Comments.findAll({ where: { eventId: req.params.id }})
     .then(event => res.status(200).json(event))
     .catch(err => res.status(500).json({error: err}))
@@ -16,13 +16,13 @@ router.get("/all/:id", validateSession, (req, res) => {
 
 //CREATE COMMENT WITH EVENT ID
 router.post("/create/:id", validateSession, (req, res) => {
-    let id = req.params.id;
+    let param = req.params.id;
     if(!req.error) {
         const comment = {
             username: req.user.username,
             comment: req.body.comment,
             owner: req.user.id,
-            eventId: id
+            eventId: param
         }
         Comments.create(comment)
         .then(comment => res.status(200).json(comment))
@@ -34,19 +34,19 @@ router.post("/create/:id", validateSession, (req, res) => {
 
 //UPDATE BY ID OF COMMENT ID
 router.put("/update/:id", validateSession, (req, res) => {
-    let id = req.params.id;
+    let param = req.params.id;
     let owner = req.user.id;
-    Comments.update(req.body, { where: {id: id, owner: owner}})
+    Comments.update(req.body, { where: {id: param, owner: owner}})
     .then(comment => res.status(200).json(comment))
     .catch(err => res.json(req.errors))
 })
 
 router.delete("/delete/:id", validateSession, (req, res) => {
-    let id = req.params.id;
+    let param = req.params.id;
     // let userid = req.user.id;
 
-    Comments.destroy({where: { id: id}})
-    .then(event => res.send(`You removed comment ${id}`))
+    Comments.destroy({where: { id: param}})
+    .then(event => res.send(`You removed comment ${param}`))
     .then(err => res.send(500, err.message))
 })
 
