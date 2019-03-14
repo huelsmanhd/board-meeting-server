@@ -20,8 +20,8 @@ router.get("/event/:id", validateSession, (req, res) => {
 
 
 //FIND ALL USER MADE EVENTS
-router.get("/user/:id", validateSession, (req, res) => {
-    Event.findAll({ where: { owner: req.params.id }})
+router.get("/user", validateSession, (req, res) => {
+    Event.findAll({ where: { owner: req.user.id }})
     .then(event => res.status(200).json(event))
     .catch(err => res.status(500).json({error: err}))
 })
