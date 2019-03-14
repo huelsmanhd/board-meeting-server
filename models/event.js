@@ -1,11 +1,18 @@
 module.exports = function(sequelize, DataTypes) {
     const Event = sequelize.define("event", {
+        username: {
+            type: DataTypes.STRING
+        },
         type: {
             type: DataTypes.STRING,
             allowNull: false
         },
         title: {
             type: DataTypes.STRING,
+            allowNull: false
+        },
+        date: {
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
         lat: {
