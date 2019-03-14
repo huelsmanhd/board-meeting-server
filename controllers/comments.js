@@ -9,7 +9,7 @@ var Comments = sequelize.import("../models/comments");
 //FINDS ALL COMMENTS FROM EVENT ID
 router.get("/all/:id", validateSession, (req, res) => {
     
-    Comments.findAll({ where: { eventId: req.params.id }})
+    Comments.findAll({ where: { eventid: req.params.id }})
     .then(event => res.status(200).json(event))
     .catch(err => res.status(500).json({error: err}))
 })
