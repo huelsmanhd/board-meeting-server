@@ -22,7 +22,7 @@ router.post("/create/:id", validateSession, (req, res) => {
             
             comment: req.body.comment,
             owner: req.user.id,
-            eventId: param
+            eventid: param
         }
         Comments.create(comment)
         .then(comment => res.status(200).json(comment))
