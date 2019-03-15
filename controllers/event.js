@@ -61,10 +61,9 @@ router.delete("/delete/:id", validateSession, (req, res) => {
     // let userid = req.user.id;
 
     Event.destroy({where: { id: id}})
-    .then(event => res.send(200), () => {
-        res.send(500, err.message)
-}
-)})
+    .then(event => res.send("You removed event" + id))
+    .catch(err => res.send(500, err.message))
+})
 
 
 module.exports = router;
