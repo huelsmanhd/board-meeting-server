@@ -18,7 +18,7 @@ router.get("/event/:id", validateSession, (req, res) => {
     .catch(err => res.status(500).json({ error: err }))
 })
 //GET ALL BY TYPE
-router.get(`/:type`, validateSession, (req, res) => {
+router.get("/:type", validateSession, (req, res) => {
     Event.findAll( { where: { type: req.params.type }})
     .then(event => res.status(200).json(event))
     .catch(err => res.status(500).json({ error: err }))
