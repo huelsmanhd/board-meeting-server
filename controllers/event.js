@@ -3,11 +3,23 @@ var router = express.Router();
 var validateSession = require("../middleware/validate-session");
 var sequelize = require("../db");
 var Event = sequelize.import("../models/event");
+var User = sequelize.import("../models/user");
 
-// Event.sync({force: true})
+Event.sync({force: true})
+// User.sync({force: true})
+Event.belongsTo(User);
+
 
 router.get("/all", validateSession, (req, res) => {
-    Event.findAll().then(event => res.status(200).json(event))
+    Event.findAll({
+        include: [{
+            model: User,
+            attributes: [
+                'id',
+                "username"
+            ],
+        }]
+    }).then(event => res.status(200).json(event))
     .catch(err => res.status(500).json({ error: err }));
 })
 
@@ -20,7 +32,9 @@ router.get("/event/:id", validateSession, (req, res) => {
 
 //FIND ALL USER MADE EVENTS
 router.get("/user", validateSession, (req, res) => {
-    Event.findAll({ where: { owner: req.user.id }})
+    Event.findAll({ 
+        where: { userId: req.user.id }
+    })
     .then(event => res.status(200).json(event))
     .catch(err => res.status(500).json({error: err}))
 })
@@ -45,7 +59,9 @@ router.post("/create", validateSession, (req, res) => {
             long: req.body.long,
             location: req.body.location,
             description: req.body.description,
-            owner: req.user.id
+            owner: req.user.id,
+            userId: req.user.id,
+            count: 1
         }
 
         Event.create(event)

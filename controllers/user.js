@@ -6,6 +6,7 @@ var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 var User = sequelize.import("../models/user");
 
+User.sync({force:true})
 
 router.post("/signup", (req, res) => {
     let email = req.body.email;

@@ -8,6 +8,10 @@ module.exports = function(sequelize, DataTypes) {
         },
         eventid: {
             type: DataTypes.INTEGER
+        },
+        userId: {
+            type: DataTypes.INTEGER
+            
         }
 
     })

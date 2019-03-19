@@ -3,13 +3,24 @@ var router = express.Router();
 var validateSession = require("../middleware/validate-session");
 var sequelize = require("../db");
 var Comments = sequelize.import("../models/comments");
+var User = sequelize.import("../models/user")
 
-// Comments.sync({force: true})
+Comments.sync({force: true})
+
+Comments.belongsTo(User);
 
 //FINDS ALL COMMENTS FROM EVENT ID
 router.get("/all/:id", validateSession, (req, res) => {
     
-    Comments.findAll({ where: { eventid: req.params.id }})
+    Comments.findAll({ 
+        where: { eventid: req.params.id },
+        include: [{
+            model: User,
+            attributes: [
+                "username"
+            ],
+        }]
+    })
     .then(event => res.status(200).json(event))
     .catch(err => res.status(500).json({error: err}))
 })
@@ -22,7 +33,8 @@ router.post("/create/:id", validateSession, (req, res) => {
             
             comment: req.body.comment,
             owner: req.user.id,
-            eventid: param
+            eventid: param,
+            userId: req.user.id
         }
         Comments.create(comment)
         .then(comment => res.status(200).json(comment))

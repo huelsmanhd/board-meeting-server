@@ -27,6 +27,12 @@ module.exports = function(sequelize, DataTypes) {
         },
         owner: {
             type: DataTypes.INTEGER
+        },
+        userId: {
+            type: DataTypes.INTEGER
+        },
+        count: {
+            type: DataTypes.INTEGER
         }
 
     })
