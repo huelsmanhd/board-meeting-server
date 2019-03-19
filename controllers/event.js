@@ -25,7 +25,16 @@ router.get("/all", validateSession, (req, res) => {
 
 //GET ONE EVENT BY ID
 router.get("/event/:id", validateSession, (req, res) => {
-    Event.findOne({ where: { id: req.params.id }})
+    Event.findOne({ 
+        where: { id: req.params.id },
+        include: [{
+            model: User,
+            attributes: [
+                'id',
+                "username"
+            ],
+        }]
+    })
     .then(event => res.status(200).json(event))
     .catch(err => res.status(500).json({ error: err }))
 })
