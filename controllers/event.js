@@ -74,7 +74,7 @@ router.post("/create", validateSession, (req, res) => {
 //UPDATE BY EVENT ID
 router.put("/update/:id", validateSession, (req, res) => {
     let id = req.params.id;
-    Event.update(req.body, { where: {id: id}})
+    Event.update(req.body, { where: {id: id, userId:req.user.id}})
     .then(event => res.status(200).json(event))
     .catch(err => res.json(req.errors))
 })
