@@ -5,7 +5,7 @@ var sequelize = require("../db");
 var Comments = sequelize.import("../models/comments");
 var User = sequelize.import("../models/user")
 
-Comments.sync({force: true})
+// Comments.sync({force: true})
 
 Comments.belongsTo(User);
 

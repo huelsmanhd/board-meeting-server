@@ -5,7 +5,7 @@ var sequelize = require("../db");
 var Event = sequelize.import("../models/event");
 var User = sequelize.import("../models/user");
 
-Event.sync({force: true})
+// Event.sync({force: true})
 // User.sync({force: true})
 Event.belongsTo(User);
 
