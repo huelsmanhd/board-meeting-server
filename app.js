@@ -27,6 +27,6 @@ app.use("/event", event);
 
 app.use("/comments", comments);
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 8080, () => {
     console.log(`App is hearing you lound and clear on ${process.env.PORT}`);
 })
