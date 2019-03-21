@@ -25,8 +25,12 @@ router.post("/signup", (req, res) => {
             sessionToken: token
         })
     },
-    createError = err => res.json({err: error})) 
-})
+    createError = err => res.status(500).json({
+      error: err,
+      status: 500,
+      message: "NATE"
+    })
+)
 
 router.post('/login', (req, res) => {
     User.findOne({ where: { email: req.body.email }})
