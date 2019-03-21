@@ -42,11 +42,17 @@ router.post('/login', (req, res) => {
                   sessionToken: token 
                 })
               } else {
-                res.status(502).json({ error: 'bad gateway' })
+                res.json({ 
+                  error: 'bad gateway',
+                  status: 502
+                 })
               }
             })
           } else {
-            res.status(500).json({ error: 'failed to authenticate' })
+            res.json({ 
+              error: 'failed to authenticate',
+              status: 500
+             })
           }
         },
         err => res.status(501).json({ error: 'failed to process'})
