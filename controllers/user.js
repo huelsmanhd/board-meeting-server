@@ -25,7 +25,7 @@ router.post("/signup", (req, res) => {
             sessionToken: token
         })
     },
-    createError = err => res.status(500).json(err.message))
+    createError = err => res.send(500, err))
 })
 
 router.post('/login', (req, res) => {
@@ -42,14 +42,14 @@ router.post('/login', (req, res) => {
                   sessionToken: token 
                 })
               } else {
-                res.status(502).send({ error: 'bad gateway' })
+                res.status(502).json({ error: 'bad gateway' })
               }
             })
           } else {
-            res.status(500).send({ error: 'failed to authenticate' })
+            res.status(500).json({ error: 'failed to authenticate' })
           }
         },
-        err => res.status(501).send({ error: 'failed to process'})
+        err => res.status(501).json({ error: 'failed to process'})
       )
   })
 
