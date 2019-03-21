@@ -42,7 +42,16 @@ router.get("/event/:id", validateSession, (req, res) => {
 //FIND ALL USER MADE EVENTS
 router.get("/user", validateSession, (req, res) => {
     Event.findAll({ 
-        where: { userId: req.user.id }
+        where: { 
+            userId: req.user.id,
+        include: [{
+            model: User,
+            attributes: [
+                'id',
+                "username"
+            ],
+        }]
+        }
     })
     .then(event => res.status(200).json(event))
     .catch(err => res.status(500).json({error: err}))
