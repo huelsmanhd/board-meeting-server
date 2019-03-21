@@ -25,7 +25,7 @@ router.post("/signup", (req, res) => {
             sessionToken: token
         })
     },
-    createError = err => res.json(err))
+    createError = err => res.json({err: error})) 
 })
 
 router.post('/login', (req, res) => {
